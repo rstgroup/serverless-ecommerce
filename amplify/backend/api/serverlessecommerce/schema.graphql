@@ -1,0 +1,48 @@
+type User @model
+  @key(name: "byEmail", fields: ["email"]) {
+  id: ID!
+  email: AWSEmail!
+  orders: [Order] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type Item @model
+  @key(name: "byPrice", fields: ["type", "price"], queryField: "getItemsByPrice")
+  @key(name: "byUpdatedAt", fields: ["type", "updatedAt"], queryField: "getItemsByUpdatedAt") {
+  id: ID!
+  title: String!
+  itemDescription: String
+  type: String!
+  photoPath: String
+  price: Int!
+  orders: [OrderItems] @connection(keyName: "byItem", fields: ["id"])
+  updatedAt: AWSDateTime!
+}
+
+type OrderItems @model(queries: null)
+  @key(name: "byOrder", fields: ["orderId", "itemId"])
+  @key(name: "byItem", fields: ["itemId", "orderId"]) {
+  id: ID!
+  orderId: ID!
+  itemId: ID!
+  name: String!
+  count: Int!
+  total: Int!
+  order: Order @connection(fields: ["orderId"])
+  item: Item @connection(fields: ["itemId"])
+}
+
+type Order @model
+  @key(name: "byUser", fields: ["userId", "createdAt"], queryField: "ordersByUser") {
+  id: ID!
+  items: [OrderItems] @connection(keyName: "byOrder", fields: ["id"])
+  userId: ID!
+  date: String
+  totalOrder: Int
+  status: OrderStatus
+  createdAt: String
+}
+
+enum OrderStatus {
+  NEW
+  IN_PROGRESS
+}

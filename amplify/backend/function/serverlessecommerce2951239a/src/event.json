@@ -1,0 +1,13 @@
+{
+  "Records": [
+    {
+      "dynamodb": {
+        "NewImage": {
+          "id": {
+            "S": "1d65a968-fb02-4b4b-9696-286d57ad6ef7"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+    "appName": "serverlessecommerce",
+    "roleName": "pinpointLambdaRole0e6d866d",
+    "cloudformationPolicyName": "cloudformationPolicy0e6d866d",
+    "cloudWatchPolicyName": "cloudWatchPolicy0e6d866d",
+    "pinpointPolicyName": "pinpointPolicy0e6d866d",
+    "authPolicyName": "pinpoint_amplify_0e6d866d",
+    "unauthPolicyName": "pinpoint_amplify_0e6d866d",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
